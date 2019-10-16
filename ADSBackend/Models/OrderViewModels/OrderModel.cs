@@ -21,10 +21,9 @@ namespace ADSBackend.Models.OrderViewModels
         [Display(Name = "Date of Order")]
         public DateTime DateOrdered { get; set; }
 
-        //Will be encoded in JSON
         [Required]
         [Display(Name = "Order")]
-        public String ProductsOrdered { get; set; }
+        public List<ProductOrderModel> ProductsOrdered { get; set; }
 
         
         
