@@ -18,7 +18,9 @@ namespace ADSBackend.Configuration
             var roles = new List<string>
             {
                 "Admin",
-                "User"
+                "User",
+                "Maker",
+                "Deliverer"
             };
 
             foreach (var roleName in roles)

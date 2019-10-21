@@ -4,14 +4,16 @@ using ADSBackend.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace ADSBackend.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20191011155110_Prod-Mig")]
+    partial class ProdMig
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -114,24 +116,6 @@ namespace ADSBackend.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
-            modelBuilder.Entity("ADSBackend.Models.OrderViewModels.OrderModel", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<DateTime>("DateOrdered");
-
-                    b.Property<string>("OrdererName")
-                        .IsRequired();
-
-                    b.Property<int>("RoomNumber");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("OrderModel");
-                });
-
             modelBuilder.Entity("ADSBackend.Models.OrderViewModels.ProductModel", b =>
                 {
                     b.Property<int>("Id")
@@ -151,29 +135,6 @@ namespace ADSBackend.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("ProductModel");
-                });
-
-            modelBuilder.Entity("ADSBackend.Models.OrderViewModels.ProductOrderModel", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Instructions");
-
-                    b.Property<int?>("OrderModelId");
-
-                    b.Property<int?>("ProductId");
-
-                    b.Property<string>("Size");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("OrderModelId");
-
-                    b.HasIndex("ProductId");
-
-                    b.ToTable("ProductOrderModel");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
@@ -257,17 +218,6 @@ namespace ADSBackend.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
-                });
-
-            modelBuilder.Entity("ADSBackend.Models.OrderViewModels.ProductOrderModel", b =>
-                {
-                    b.HasOne("ADSBackend.Models.OrderViewModels.OrderModel")
-                        .WithMany("ProductsOrdered")
-                        .HasForeignKey("OrderModelId");
-
-                    b.HasOne("ADSBackend.Models.OrderViewModels.ProductModel", "Product")
-                        .WithMany()
-                        .HasForeignKey("ProductId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>

@@ -2,6 +2,7 @@
 using ADSBackend.Models.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using ADSBackend.Models.OrderViewModels;
 
 namespace ADSBackend.Data
 {
@@ -21,5 +22,11 @@ namespace ADSBackend.Data
             // For example, you can rename the ASP.NET Identity table names and more.
             // Add your customizations after calling base.OnModelCreating(builder);
         }
+
+
+        public DbSet<ADSBackend.Models.OrderViewModels.ProductModel> ProductModel { get; set; }
+
+
+        public DbSet<ADSBackend.Models.OrderViewModels.OrderModel> OrderModel { get; set; }
     }
 }
