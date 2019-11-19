@@ -48,10 +48,10 @@ namespace ADSBackend.Controllers
             return new ConfigResponse();
         }
 
-        [HttpGet("ProductModel")]
+        [HttpGet("GetProductList")]
         public async Task<List<ProductModel>> GetProductList() {
-            var ProductModel = await _context.ProductModel.ToListAsync();
-            return ProductModel;
+            var ProductModels = await _context.ProductModel.ToListAsync();
+            return ProductModels;
         }
 
         [HttpGet("GetOrderList")]
