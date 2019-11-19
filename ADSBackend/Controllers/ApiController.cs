@@ -53,5 +53,12 @@ namespace ADSBackend.Controllers
             var ProductModel = await _context.ProductModel.ToListAsync();
             return ProductModel;
         }
+
+        [HttpGet("GetOrderList")]
+        public async Task<List<OrderModel>> GetOrderList()
+        {
+            var OrderModels = await _context.OrderModel.ToListAsync();
+            return OrderModels;
+        }
     }
 }
