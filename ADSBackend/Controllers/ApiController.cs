@@ -1,5 +1,8 @@
-﻿using ADSBackend.Models.ApiModels;
+﻿using ADSBackend.Data;
+using ADSBackend.Models.ApiModels;
+using ADSBackend.Models.OrderViewModels;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,11 +16,13 @@ namespace ADSBackend.Controllers
     {
         private readonly Services.Configuration Configuration;
         private readonly Services.Cache _cache;
+        private readonly ApplicationDbContext _context;
 
-        public ApiController(Services.Configuration configuration, Services.Cache cache)
+        public ApiController(Services.Configuration configuration, Services.Cache cache, ApplicationDbContext context)
         {
             Configuration = configuration;
             _cache = cache;
+            _context = context;
         }
 
         // GET: api/News
@@ -41,6 +46,12 @@ namespace ADSBackend.Controllers
         {
             // TODO: extend this object to include some configuration items
             return new ConfigResponse();
+        }
+
+        [HttpGet("ProductModel")]
+        public async Task<List<ProductModel>> GetProductList() {
+            var ProductModel = await _context.ProductModel.ToListAsync();
+            return ProductModel;
         }
     }
 }
