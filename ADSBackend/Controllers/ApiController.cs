@@ -33,12 +33,14 @@ namespace ADSBackend.Controllers
             return new ConfigResponse();
         }
 
+        //GET: models/ProductModels
         [HttpGet("GetProductList")]
         public async Task<List<ProductModel>> GetProductList() {
             var ProductModels = await _context.ProductModel.ToListAsync();
             return ProductModels;
         }
 
+        //GET: models/OrderModels
         [HttpGet("GetOrderList")]
         public async Task<List<OrderModel>> GetOrderList()
         {
@@ -46,6 +48,7 @@ namespace ADSBackend.Controllers
             return OrderModels;
         }
 
+        //GET: models/ProductOrderModels
         [HttpGet("GetProductOrderList")]
         public async Task<List<ProductOrderModel>> GetProductOrderList()
         {
