@@ -1,5 +1,8 @@
-﻿using ADSBackend.Models.ApiModels;
+﻿using ADSBackend.Data;
+using ADSBackend.Models.ApiModels;
+using ADSBackend.Models.OrderViewModels;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,26 +16,13 @@ namespace ADSBackend.Controllers
     {
         private readonly Services.Configuration Configuration;
         private readonly Services.Cache _cache;
+        private readonly ApplicationDbContext _context;
 
-        public ApiController(Services.Configuration configuration, Services.Cache cache)
+        public ApiController(Services.Configuration configuration, Services.Cache cache, ApplicationDbContext context)
         {
             Configuration = configuration;
             _cache = cache;
-        }
-
-        // GET: api/News
-        [HttpGet("News")]
-        public async Task<List<NewsFeedItem>> GetNewsFeed()
-        {
-            var newsUrl = new Uri("https://www.eastonsd.org/apps/news/news_rss.jsp");
-
-            string sourceUrl = newsUrl.GetLeftPart(UriPartial.Authority);
-            string endpoint = newsUrl.PathAndQuery;
-
-            Task<List<NewsFeedItem>> fetchNewsFromSource() => Util.RSS.GetNewsFeed(sourceUrl, endpoint);
-
-            var feedItems = await _cache.GetAsync("RSS", fetchNewsFromSource, TimeSpan.FromMinutes(5));
-            return feedItems.OrderByDescending(x => x.PublishDate).ToList();
+            _context = context;
         }
 
         // GET: api/Config
@@ -42,5 +32,29 @@ namespace ADSBackend.Controllers
             // TODO: extend this object to include some configuration items
             return new ConfigResponse();
         }
+
+        //GET: models/ProductModels
+        [HttpGet("GetProductList")]
+        public async Task<List<ProductModel>> GetProductList() {
+            var ProductModels = await _context.ProductModel.ToListAsync();
+            return ProductModels;
+        }
+
+        //GET: models/OrderModels
+        [HttpGet("GetOrderList")]
+        public async Task<List<OrderModel>> GetOrderList()
+        {
+            var OrderModels = await _context.OrderModel.ToListAsync();
+            return OrderModels;
+        }
+
+        //GET: models/ProductOrderModels
+        [HttpGet("GetProductOrderList")]
+        public async Task<List<ProductOrderModel>> GetProductOrderList()
+        {
+            var ProductOrderModels = await _context.ProductOrderModel.ToListAsync();
+            return ProductOrderModels;
+        }
+
     }
 }

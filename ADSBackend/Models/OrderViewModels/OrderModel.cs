@@ -20,6 +20,8 @@ namespace ADSBackend.Models.OrderViewModels
         [DataType(DataType.Date)]
         [Display(Name = "Date of Order")]
         public DateTime DateOrdered { get; set; }
+        [Display(Name = "Status")]
+        public String Status { get; set; }
 
         [Required]
         [Display(Name = "Order")]
