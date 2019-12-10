@@ -26,11 +26,11 @@ namespace ADSBackend.Controllers
         }
 
         //POST:
-        [HttpPost("ChangeOrderStatus")]
-        public async Task<OrderModel> ChangeOrderStatus()
+        /*[HttpPost("ChangeOrderStatus")]
+        public async Task<OrderModel> AddOrder(int Id, string newStatus)
         {
 
-        }
+        }*/
 
         // GET: api/Config
         [HttpGet("Config")]
@@ -41,10 +41,17 @@ namespace ADSBackend.Controllers
         }
 
         //GET: models/OrderViewModels/ProductModels
-        [HttpGet("GetProductList")]
+        [HttpGet("GetProducts")]
         public async Task<List<ProductModel>> GetProductList() {
             var ProductModels = await _context.ProductModel.ToListAsync();
             return ProductModels;
+        }
+
+        [HttpGet("GetProducts/{id}")]
+        public async Task<ActionResult<ProductModel>> GetProductById(int id)
+        {
+            var ProductModel = await _context.ProductModel.FindAsync(id);
+            return ProductModel;
         }
 
         //GET: models/OrderViewModels/OrderModels
