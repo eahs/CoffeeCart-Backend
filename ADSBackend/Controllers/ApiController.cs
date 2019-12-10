@@ -69,6 +69,19 @@ namespace ADSBackend.Controllers
             return OrderModels;
         }
 
+        //GET: api/GetOrder/id
+        [HttpGet("GetOrder/{id}")]
+        public async Task<ActionResult<OrderModel>> GetOrderById(int id)
+        {
+            var OrderModel = await _context.OrderModel.FindAsync(id);
+
+            if (OrderModel == null)
+            {
+                return NotFound();
+            }
+
+            return OrderModel;
+        }
         //GET: models/OrderViewModels/ProductOrderModels
         /*[HttpGet("GetProductOrderList")]
         public async Task<List<ProductOrderModel>> GetProductOrderList()
