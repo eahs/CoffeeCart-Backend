@@ -40,23 +40,30 @@ namespace ADSBackend.Controllers
             return new ConfigResponse();
         }
 
-        //GET: models/OrderViewModels/ProductModels
+        //GET: api/GetProducts
         [HttpGet("GetProducts")]
         public async Task<List<ProductModel>> GetProductList() {
             var ProductModels = await _context.ProductModel.ToListAsync();
             return ProductModels;
         }
 
-        [HttpGet("GetProducts/{id}")]
+        //GET: api/GetProduct/id
+        [HttpGet("GetProduct/{id}")]
         public async Task<ActionResult<ProductModel>> GetProductById(int id)
         {
             var ProductModel = await _context.ProductModel.FindAsync(id);
+
+            if (ProductModel == null)
+            {
+                return NotFound();
+            }
+
             return ProductModel;
         }
 
-        //GET: models/OrderViewModels/OrderModels
-        [HttpGet("GetOrderList")]
-        public async Task<List<OrderModel>> GetOrderList()
+        //GET: api/GetOrders
+        [HttpGet("GetOrders")]
+        public async Task<List<OrderModel>> GetOrders()
         {
             var OrderModels = await _context.OrderModel.ToListAsync();
             return OrderModels;
