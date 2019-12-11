@@ -15,7 +15,7 @@ namespace ADSBackend.Models.OrderViewModels
         public String OrdererName { get; set; }
         [Required]
         [Display(Name = "Room Number")]
-        public int RoomNumber { get; set; }
+        public string RoomNumber { get; set; }
         [Required]
         [DataType(DataType.Date)]
         [Display(Name = "Date of Order")]
@@ -23,7 +23,6 @@ namespace ADSBackend.Models.OrderViewModels
         [Display(Name = "Status")]
         public String Status { get; set; }
 
-        [Required]
         [Display(Name = "Order")]
         public List<ProductOrderModel> ProductsOrdered { get; set; }
 
