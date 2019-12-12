@@ -95,7 +95,7 @@ namespace ADSBackend.Controllers
 
             productmodel.Name = forms["name"];
             productmodel.Description = forms["price"];
-            productmodel.Type = toProductType(forms["type"]);
+            productmodel.Type = ToProductType(forms["type"]);
             productmodel.Price = forms["price"];
 
             _context.ProductModel.Update(productmodel);
@@ -120,7 +120,7 @@ namespace ADSBackend.Controllers
         }
 
         //to convert string to ProductType
-        private ProductType toProductType(StringValues str)
+        private ProductType ToProductType(StringValues str)
         {
             if (str == "Beverage")
             {
