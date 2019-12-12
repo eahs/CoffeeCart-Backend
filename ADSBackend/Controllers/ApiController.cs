@@ -1,8 +1,10 @@
 ﻿using ADSBackend.Data;
 using ADSBackend.Models.ApiModels;
 using ADSBackend.Models.OrderViewModels;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Primitives;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -82,13 +84,52 @@ namespace ADSBackend.Controllers
 
             return OrderModel;
         }
-        //GET: models/OrderViewModels/ProductOrderModels
-        /*[HttpGet("GetProductOrderList")]
-        public async Task<List<ProductOrderModel>> GetProductOrderList()
-        {
-            var ProductOrderModels = await _context.ProductOrderModel.ToListAsync();
-            return ProductOrderModels;
-        }*/
 
+        //PUT: api/ProductModel/id
+        [HttpPost("ProductModel")]
+        public async Task<IActionResult> PutTodoItem(IFormCollection forms)
+        {
+            int id;
+            Int32.TryParse(forms["id"], out id);
+            var productmodel = await _context.ProductModel.FirstOrDefaultAsync(p => p.Id == id);
+
+            productmodel.Name = forms["name"];
+            productmodel.Description = forms["price"];
+            productmodel.Type = toProductType(forms["type"]);
+            productmodel.Price = forms["price"];
+
+            _context.ProductModel.Update(productmodel);
+
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (await _context.ProductModel.FirstOrDefaultAsync(p => p.Id == forms["id"]) == null)
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return NoContent();
+        }
+
+        //to convert string to ProductType
+        private ProductType toProductType(StringValues str)
+        {
+            if (str == "Beverage")
+            {
+                return ProductType.Beverage;
+            }
+            else
+            {
+                return ProductType.Pastry;
+            }
+        }
     }
 }
