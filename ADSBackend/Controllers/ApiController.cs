@@ -85,6 +85,20 @@ namespace ADSBackend.Controllers
             return OrderModel;
         }
 
+        //GET: api/GetOrderByName/name
+        [HttpGet("GetOrderByName/{name}")]
+        public async Task<ActionResult<OrderModel>> GetOrderByName(string name)
+        {
+            var OrderModel = await _context.OrderModel.FirstAsync(p => p.OrdererName == name);
+
+            if (OrderModel == null)
+            {
+                return NotFound();
+            }
+
+            return OrderModel;
+        }
+
         //PUT: api/ProductModel/id
         [HttpPost("ProductModel")]
         public async Task<IActionResult> EditProductModel(IFormCollection forms)
