@@ -15,7 +15,7 @@ namespace ADSBackend.Models.OrderViewModels
         public String OrdererName { get; set; }
         [Required]
         [Display(Name = "Room Number")]
-        public string RoomNumber { get; set; }
+        public String RoomNumber { get; set; }
         [Required]
         [DataType(DataType.Date)]
         [Display(Name = "Date of Order")]

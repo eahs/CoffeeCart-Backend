@@ -87,10 +87,9 @@ namespace ADSBackend.Controllers
 
         //PUT: api/ProductModel/id
         [HttpPost("ProductModel")]
-        public async Task<IActionResult> PutTodoItem(IFormCollection forms)
+        public async Task<IActionResult> EditProductModel(IFormCollection forms)
         {
-            int id;
-            Int32.TryParse(forms["id"], out id);
+            Int32.TryParse(forms["id"], out int id);
             var productmodel = await _context.ProductModel.FirstOrDefaultAsync(p => p.Id == id);
 
             productmodel.Name = forms["name"];
@@ -99,6 +98,39 @@ namespace ADSBackend.Controllers
             productmodel.Price = forms["price"];
 
             _context.ProductModel.Update(productmodel);
+
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (await _context.ProductModel.FirstOrDefaultAsync(p => p.Id == forms["id"]) == null)
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return NoContent();
+        }
+
+        [HttpPost("OrderModel")]
+        public async Task<IActionResult> EditOrderModel(IFormCollection forms)
+        {
+            Int32.TryParse(forms["id"], out int id);
+            var ordermodel = await _context.OrderModel.FirstOrDefaultAsync(p => p.Id == id);
+
+            ordermodel.OrdererName = forms["name"];
+            //ordermodel.RoomNumber = forms["room"];
+            ordermodel.DateOrdered = Convert.ToDateTime(forms["date"]);
+            ordermodel.Status = forms["status"];
+            //ordermodel.ProductsOrdered = forms["order"];
+
+            _context.OrderModel.Update(ordermodel);
 
             try
             {
