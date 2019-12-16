@@ -64,6 +64,38 @@ namespace ADSBackend.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "OrderModel",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    OrdererName = table.Column<string>(nullable: false),
+                    RoomNumber = table.Column<int>(nullable: false),
+                    DateOrdered = table.Column<DateTime>(nullable: false),
+                    Status = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_OrderModel", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ProductModel",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Name = table.Column<string>(nullable: false),
+                    Description = table.Column<string>(nullable: true),
+                    Type = table.Column<int>(nullable: false),
+                    Price = table.Column<string>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ProductModel", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "AspNetRoleClaims",
                 columns: table => new
                 {
@@ -169,6 +201,34 @@ namespace ADSBackend.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "ProductOrderModel",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    ProductId = table.Column<int>(nullable: true),
+                    Size = table.Column<string>(nullable: true),
+                    Instructions = table.Column<string>(nullable: true),
+                    OrderModelId = table.Column<int>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ProductOrderModel", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_ProductOrderModel_OrderModel_OrderModelId",
+                        column: x => x.OrderModelId,
+                        principalTable: "OrderModel",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_ProductOrderModel_ProductModel_ProductId",
+                        column: x => x.ProductId,
+                        principalTable: "ProductModel",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
@@ -207,6 +267,16 @@ namespace ADSBackend.Migrations
                 column: "NormalizedUserName",
                 unique: true,
                 filter: "[NormalizedUserName] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ProductOrderModel_OrderModelId",
+                table: "ProductOrderModel",
+                column: "OrderModelId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ProductOrderModel_ProductId",
+                table: "ProductOrderModel",
+                column: "ProductId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -230,10 +300,19 @@ namespace ADSBackend.Migrations
                 name: "ConfigurationItem");
 
             migrationBuilder.DropTable(
+                name: "ProductOrderModel");
+
+            migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "OrderModel");
+
+            migrationBuilder.DropTable(
+                name: "ProductModel");
         }
     }
 }

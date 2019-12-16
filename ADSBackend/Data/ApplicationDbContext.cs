@@ -28,5 +28,7 @@ namespace ADSBackend.Data
 
 
         public DbSet<ADSBackend.Models.OrderViewModels.OrderModel> OrderModel { get; set; }
+
+        public DbSet<ADSBackend.Models.OrderViewModels.ProductOrderModel> ProductOrderModel { get; set; }
     }
 }
