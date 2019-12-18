@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ADSBackend.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20191216170424_Initial")]
-    partial class Initial
+    [Migration("20191218174523_NameChange")]
+    partial class NameChange
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
