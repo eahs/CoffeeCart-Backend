@@ -29,7 +29,7 @@ namespace ADSBackend.Controllers
 
         //POST:
         /*[HttpPost("ChangeOrderStatus")]
-        public async Task<OrderModel> AddOrder(int Id, string newStatus)
+        public async Task<Order> AddOrder(int Id, string newStatus)
         {
 
         }*/
@@ -44,74 +44,74 @@ namespace ADSBackend.Controllers
 
         //GET: api/GetProducts
         [HttpGet("GetProducts")]
-        public async Task<List<ProductModel>> GetProductList() {
-            var ProductModels = await _context.ProductModel.ToListAsync();
-            return ProductModels;
+        public async Task<List<Product>> GetProductList() {
+            var Products = await _context.Product.ToListAsync();
+            return Products;
         }
 
         //GET: api/GetProduct/id
         [HttpGet("GetProduct/{id}")]
-        public async Task<ActionResult<ProductModel>> GetProductById(int id)
+        public async Task<ActionResult<Product>> GetProductById(int id)
         {
-            var ProductModel = await _context.ProductModel.FindAsync(id);
+            var Product = await _context.Product.FindAsync(id);
 
-            if (ProductModel == null)
+            if (Product == null)
             {
                 return NotFound();
             }
 
-            return ProductModel;
+            return Product;
         }
 
         //GET: api/GetOrders
         [HttpGet("GetOrders")]
-        public async Task<List<OrderModel>> GetOrders()
+        public async Task<List<Order>> GetOrders()
         {
-            var OrderModels = await _context.OrderModel.ToListAsync();
-            return OrderModels;
+            var Orders = await _context.Order.ToListAsync();
+            return Orders;
         }
 
         //GET: api/GetOrder/id
         [HttpGet("GetOrder/{id}")]
-        public async Task<ActionResult<OrderModel>> GetOrderById(int id)
+        public async Task<ActionResult<Order>> GetOrderById(int id)
         {
-            var OrderModel = await _context.OrderModel.FindAsync(id);
+            var Order = await _context.Order.FindAsync(id);
 
-            if (OrderModel == null)
+            if (Order == null)
             {
                 return NotFound();
             }
 
-            return OrderModel;
+            return Order;
         }
 
         //GET: api/GetOrderByName/name
         [HttpGet("GetOrderByName/{name}")]
-        public async Task<ActionResult<OrderModel>> GetOrderByName(string name)
+        public async Task<ActionResult<Order>> GetOrderByName(string name)
         {
-            var OrderModel = await _context.OrderModel.FirstAsync(p => p.OrdererName == name);
+            var Order = await _context.Order.FirstAsync(p => p.OrdererName == name);
 
-            if (OrderModel == null)
+            if (Order == null)
             {
                 return NotFound();
             }
 
-            return OrderModel;
+            return Order;
         }
 
-        //PUT: api/ProductModel/id
-        [HttpPost("ProductModel")]
-        public async Task<IActionResult> EditProductModel(IFormCollection forms)
+        //PUT: api/Product/id
+        [HttpPost("Product")]
+        public async Task<IActionResult> EditProduct(IFormCollection forms)
         {
             Int32.TryParse(forms["id"], out int id);
-            var productmodel = await _context.ProductModel.FirstOrDefaultAsync(p => p.Id == id);
+            var Product = await _context.Product.FirstOrDefaultAsync(p => p.Id == id);
 
-            productmodel.Name = forms["name"];
-            productmodel.Description = forms["price"];
-            productmodel.Type = ToProductType(forms["type"]);
-            productmodel.Price = forms["price"];
+            Product.Name = forms["name"];
+            Product.Description = forms["price"];
+            Product.Type = ToProductType(forms["type"]);
+            Product.Price = forms["price"];
 
-            _context.ProductModel.Update(productmodel);
+            _context.Product.Update(Product);
 
             try
             {
@@ -119,7 +119,7 @@ namespace ADSBackend.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (await _context.ProductModel.FirstOrDefaultAsync(p => p.Id == forms["id"]) == null)
+                if (await _context.Product.FirstOrDefaultAsync(p => p.Id == forms["id"]) == null)
                 {
                     return NotFound();
                 }
@@ -132,19 +132,19 @@ namespace ADSBackend.Controllers
             return NoContent();
         }
 
-        [HttpPost("OrderModel")]
-        public async Task<IActionResult> EditOrderModel(IFormCollection forms)
+        [HttpPost("Order")]
+        public async Task<IActionResult> EditOrder(IFormCollection forms)
         {
             Int32.TryParse(forms["id"], out int id);
-            var ordermodel = await _context.OrderModel.FirstOrDefaultAsync(p => p.Id == id);
+            var Order = await _context.Order.FirstOrDefaultAsync(p => p.Id == id);
 
-            ordermodel.OrdererName = forms["name"];
-            //ordermodel.RoomNumber = forms["room"];
-            ordermodel.DateOrdered = Convert.ToDateTime(forms["date"]);
-            ordermodel.Status = forms["status"];
-            //ordermodel.ProductsOrdered = forms["order"];
+            Order.OrdererName = forms["name"];
+            //Order.RoomNumber = forms["room"];
+            Order.DateOrdered = Convert.ToDateTime(forms["date"]);
+            Order.Status = forms["status"];
+            //Order.ProductsOrdered = forms["order"];
 
-            _context.OrderModel.Update(ordermodel);
+            _context.Order.Update(Order);
 
             try
             {
@@ -152,7 +152,7 @@ namespace ADSBackend.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (await _context.ProductModel.FirstOrDefaultAsync(p => p.Id == forms["id"]) == null)
+                if (await _context.Product.FirstOrDefaultAsync(p => p.Id == forms["id"]) == null)
                 {
                     return NotFound();
                 }

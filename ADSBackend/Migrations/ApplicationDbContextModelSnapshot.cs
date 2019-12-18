@@ -114,7 +114,7 @@ namespace ADSBackend.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
-            modelBuilder.Entity("ADSBackend.Models.OrderViewModels.OrderModel", b =>
+            modelBuilder.Entity("ADSBackend.Models.OrderViewModels.Order", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -132,10 +132,10 @@ namespace ADSBackend.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("OrderModel");
+                    b.ToTable("Order");
                 });
 
-            modelBuilder.Entity("ADSBackend.Models.OrderViewModels.ProductModel", b =>
+            modelBuilder.Entity("ADSBackend.Models.OrderViewModels.Product", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -153,10 +153,10 @@ namespace ADSBackend.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("ProductModel");
+                    b.ToTable("Product");
                 });
 
-            modelBuilder.Entity("ADSBackend.Models.OrderViewModels.ProductOrderModel", b =>
+            modelBuilder.Entity("ADSBackend.Models.OrderViewModels.ProductOrder", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -164,7 +164,7 @@ namespace ADSBackend.Migrations
 
                     b.Property<string>("Instructions");
 
-                    b.Property<int?>("OrderModelId");
+                    b.Property<int?>("OrderId");
 
                     b.Property<int?>("ProductId");
 
@@ -172,11 +172,11 @@ namespace ADSBackend.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("OrderModelId");
+                    b.HasIndex("OrderId");
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("ProductOrderModel");
+                    b.ToTable("ProductOrder");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
@@ -262,13 +262,13 @@ namespace ADSBackend.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("ADSBackend.Models.OrderViewModels.ProductOrderModel", b =>
+            modelBuilder.Entity("ADSBackend.Models.OrderViewModels.ProductOrder", b =>
                 {
-                    b.HasOne("ADSBackend.Models.OrderViewModels.OrderModel")
+                    b.HasOne("ADSBackend.Models.OrderViewModels.Order")
                         .WithMany("ProductsOrdered")
-                        .HasForeignKey("OrderModelId");
+                        .HasForeignKey("OrderId");
 
-                    b.HasOne("ADSBackend.Models.OrderViewModels.ProductModel", "Product")
+                    b.HasOne("ADSBackend.Models.OrderViewModels.Product", "Product")
                         .WithMany()
                         .HasForeignKey("ProductId");
                 });

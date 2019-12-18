@@ -42,14 +42,14 @@
                 </li>
                 @if (User.IsInRole("Admin") ||  User.IsInRole("Deliverer") || User.IsInRole("Maker"))
                 {
-                    <li is-active-route asp-controller="OrderModels">
-                        <a asp-controller="OrderModels" asp-action="Index"><i class="fa fa-coffee"></i><span class="nav-label">Orders</span></a>
+                    <li is-active-route asp-controller="Orders">
+                        <a asp-controller="Orders" asp-action="Index"><i class="fa fa-coffee"></i><span class="nav-label">Orders</span></a>
                     </li>
                 }
                 @if (User.IsInRole("Admin"))
                 {
-                    <li is-active-route asp-controller="ProductModels">
-                        <a asp-controller="ProductModels" asp-action="Index"><i class="fa fa-list"></i><span class="nav-label">Manage Products</span></a>
+                    <li is-active-route asp-controller="Products">
+                        <a asp-controller="Products" asp-action="Index"><i class="fa fa-list"></i><span class="nav-label">Manage Products</span></a>
                     </li>
                     <li is-active-route asp-controller="Users">
                         <a asp-controller="Users" asp-action="Index"><i class="fa fa-users"></i><span class="nav-label">Manage Users</span></a>

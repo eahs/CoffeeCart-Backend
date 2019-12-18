@@ -10,22 +10,22 @@ using ADSBackend.Models.OrderViewModels;
 
 namespace ADSBackend.Views
 {
-    public class OrderModelsController : Controller
+    public class OrdersController : Controller
     {
         private readonly ApplicationDbContext _context;
 
-        public OrderModelsController(ApplicationDbContext context)
+        public OrdersController(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        // GET: OrderModels
+        // GET: Orders
         public async Task<IActionResult> Index()
         {
-            return View(await _context.OrderModel.ToListAsync());
+            return View(await _context.Order.ToListAsync());
         }
 
-        // GET: OrderModels/Details/5
+        // GET: Orders/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -33,39 +33,39 @@ namespace ADSBackend.Views
                 return NotFound();
             }
 
-            var orderModel = await _context.OrderModel
+            var Order = await _context.Order
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (orderModel == null)
+            if (Order == null)
             {
                 return NotFound();
             }
 
-            return View(orderModel);
+            return View(Order);
         }
 
-        // GET: OrderModels/Create
+        // GET: Orders/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: OrderModels/Create
+        // POST: Orders/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,OrdererName,RoomNumber,DateOrdered,Status")] OrderModel orderModel)
+        public async Task<IActionResult> Create([Bind("Id,OrdererName,RoomNumber,DateOrdered,Status")] Order Order)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(orderModel);
+                _context.Add(Order);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(orderModel);
+            return View(Order);
         }
 
-        // GET: OrderModels/Edit/5
+        // GET: Orders/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -73,22 +73,22 @@ namespace ADSBackend.Views
                 return NotFound();
             }
 
-            var orderModel = await _context.OrderModel.FindAsync(id);
-            if (orderModel == null)
+            var Order = await _context.Order.FindAsync(id);
+            if (Order == null)
             {
                 return NotFound();
             }
-            return View(orderModel);
+            return View(Order);
         }
 
-        // POST: OrderModels/Edit/5
+        // POST: Orders/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,OrdererName,RoomNumber,DateOrdered,Status")] OrderModel orderModel)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,OrdererName,RoomNumber,DateOrdered,Status")] Order Order)
         {
-            if (id != orderModel.Id)
+            if (id != Order.Id)
             {
                 return NotFound();
             }
@@ -97,12 +97,12 @@ namespace ADSBackend.Views
             {
                 try
                 {
-                    _context.Update(orderModel);
+                    _context.Update(Order);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!OrderModelExists(orderModel.Id))
+                    if (!OrderExists(Order.Id))
                     {
                         return NotFound();
                     }
@@ -113,10 +113,10 @@ namespace ADSBackend.Views
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(orderModel);
+            return View(Order);
         }
 
-        // GET: OrderModels/Delete/5
+        // GET: Orders/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -124,30 +124,30 @@ namespace ADSBackend.Views
                 return NotFound();
             }
 
-            var orderModel = await _context.OrderModel
+            var Order = await _context.Order
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (orderModel == null)
+            if (Order == null)
             {
                 return NotFound();
             }
 
-            return View(orderModel);
+            return View(Order);
         }
 
-        // POST: OrderModels/Delete/5
+        // POST: Orders/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var orderModel = await _context.OrderModel.FindAsync(id);
-            _context.OrderModel.Remove(orderModel);
+            var Order = await _context.Order.FindAsync(id);
+            _context.Order.Remove(Order);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool OrderModelExists(int id)
+        private bool OrderExists(int id)
         {
-            return _context.OrderModel.Any(e => e.Id == id);
+            return _context.Order.Any(e => e.Id == id);
         }
     }
 }

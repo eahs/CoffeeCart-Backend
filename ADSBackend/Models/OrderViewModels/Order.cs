@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace ADSBackend.Models.OrderViewModels
 {
-    public class OrderModel
+    public class Order
     {
         public int Id { get; set; }
 
@@ -24,7 +24,7 @@ namespace ADSBackend.Models.OrderViewModels
         public String Status { get; set; }
 
         [Display(Name = "Order")]
-        public List<ProductOrderModel> ProductsOrdered { get; set; }
+        public List<ProductOrder> ProductsOrdered { get; set; }
 
         
         

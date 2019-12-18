@@ -24,11 +24,11 @@ namespace ADSBackend.Data
         }
 
 
-        public DbSet<ADSBackend.Models.OrderViewModels.ProductModel> ProductModel { get; set; }
+        public DbSet<ADSBackend.Models.OrderViewModels.Product> Product { get; set; }
 
 
-        public DbSet<ADSBackend.Models.OrderViewModels.OrderModel> OrderModel { get; set; }
+        public DbSet<ADSBackend.Models.OrderViewModels.Order> Order { get; set; }
 
-        public DbSet<ADSBackend.Models.OrderViewModels.ProductOrderModel> ProductOrderModel { get; set; }
+        public DbSet<ADSBackend.Models.OrderViewModels.ProductOrder> ProductOrder { get; set; }
     }
 }

@@ -64,23 +64,23 @@ namespace ADSBackend.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "OrderModel",
+                name: "Order",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     OrdererName = table.Column<string>(nullable: false),
-                    RoomNumber = table.Column<int>(nullable: false),
+                    RoomNumber = table.Column<string>(nullable: false),
                     DateOrdered = table.Column<DateTime>(nullable: false),
                     Status = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_OrderModel", x => x.Id);
+                    table.PrimaryKey("PK_Order", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "ProductModel",
+                name: "Product",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -92,7 +92,7 @@ namespace ADSBackend.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ProductModel", x => x.Id);
+                    table.PrimaryKey("PK_Product", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -202,7 +202,7 @@ namespace ADSBackend.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "ProductOrderModel",
+                name: "ProductOrder",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -210,21 +210,21 @@ namespace ADSBackend.Migrations
                     ProductId = table.Column<int>(nullable: true),
                     Size = table.Column<string>(nullable: true),
                     Instructions = table.Column<string>(nullable: true),
-                    OrderModelId = table.Column<int>(nullable: true)
+                    OrderId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ProductOrderModel", x => x.Id);
+                    table.PrimaryKey("PK_ProductOrder", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_ProductOrderModel_OrderModel_OrderModelId",
-                        column: x => x.OrderModelId,
-                        principalTable: "OrderModel",
+                        name: "FK_ProductOrder_Order_OrderId",
+                        column: x => x.OrderId,
+                        principalTable: "Order",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_ProductOrderModel_ProductModel_ProductId",
+                        name: "FK_ProductOrder_Product_ProductId",
                         column: x => x.ProductId,
-                        principalTable: "ProductModel",
+                        principalTable: "Product",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -269,13 +269,13 @@ namespace ADSBackend.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ProductOrderModel_OrderModelId",
-                table: "ProductOrderModel",
-                column: "OrderModelId");
+                name: "IX_ProductOrder_OrderId",
+                table: "ProductOrder",
+                column: "OrderId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ProductOrderModel_ProductId",
-                table: "ProductOrderModel",
+                name: "IX_ProductOrder_ProductId",
+                table: "ProductOrder",
                 column: "ProductId");
         }
 
@@ -300,7 +300,7 @@ namespace ADSBackend.Migrations
                 name: "ConfigurationItem");
 
             migrationBuilder.DropTable(
-                name: "ProductOrderModel");
+                name: "ProductOrder");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
@@ -309,10 +309,10 @@ namespace ADSBackend.Migrations
                 name: "AspNetUsers");
 
             migrationBuilder.DropTable(
-                name: "OrderModel");
+                name: "Order");
 
             migrationBuilder.DropTable(
-                name: "ProductModel");
+                name: "Product");
         }
     }
 }

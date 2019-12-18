@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace ADSBackend.Models.OrderViewModels
 {
-    public class ProductModel
+    public class Product
     {
         public int Id { get; set; }
 
