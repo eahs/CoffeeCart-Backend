@@ -1,6 +1,6 @@
 ﻿using ADSBackend.Data;
 using ADSBackend.Models.ApiModels;
-using ADSBackend.Models.OrderViewModels;
+using ADSBackend.Models.OrderModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;

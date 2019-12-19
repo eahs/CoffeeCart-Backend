@@ -114,7 +114,7 @@ namespace ADSBackend.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
-            modelBuilder.Entity("ADSBackend.Models.OrderViewModels.Order", b =>
+            modelBuilder.Entity("ADSBackend.Models.OrderModels.Order", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -135,7 +135,7 @@ namespace ADSBackend.Migrations
                     b.ToTable("Order");
                 });
 
-            modelBuilder.Entity("ADSBackend.Models.OrderViewModels.Product", b =>
+            modelBuilder.Entity("ADSBackend.Models.OrderModels.Product", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -156,7 +156,7 @@ namespace ADSBackend.Migrations
                     b.ToTable("Product");
                 });
 
-            modelBuilder.Entity("ADSBackend.Models.OrderViewModels.ProductOrder", b =>
+            modelBuilder.Entity("ADSBackend.Models.OrderModels.ProductOrder", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -262,13 +262,13 @@ namespace ADSBackend.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("ADSBackend.Models.OrderViewModels.ProductOrder", b =>
+            modelBuilder.Entity("ADSBackend.Models.OrderModels.ProductOrder", b =>
                 {
-                    b.HasOne("ADSBackend.Models.OrderViewModels.Order")
+                    b.HasOne("ADSBackend.Models.OrderModels.Order")
                         .WithMany("ProductsOrdered")
                         .HasForeignKey("OrderId");
 
-                    b.HasOne("ADSBackend.Models.OrderViewModels.Product", "Product")
+                    b.HasOne("ADSBackend.Models.OrderModels.Product", "Product")
                         .WithMany()
                         .HasForeignKey("ProductId");
                 });

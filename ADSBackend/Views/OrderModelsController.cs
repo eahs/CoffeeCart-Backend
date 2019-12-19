@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ADSBackend.Data;
-using ADSBackend.Models.OrderViewModels;
+using ADSBackend.Models.OrderModels;
 
 namespace ADSBackend.Views
 {

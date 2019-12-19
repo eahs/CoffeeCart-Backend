@@ -2,7 +2,7 @@
 using ADSBackend.Models.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using ADSBackend.Models.OrderViewModels;
+using ADSBackend.Models.OrderModels;
 
 namespace ADSBackend.Data
 {
@@ -24,11 +24,11 @@ namespace ADSBackend.Data
         }
 
 
-        public DbSet<ADSBackend.Models.OrderViewModels.Product> Product { get; set; }
+        public DbSet<ADSBackend.Models.OrderModels.Product> Product { get; set; }
 
 
-        public DbSet<ADSBackend.Models.OrderViewModels.Order> Order { get; set; }
+        public DbSet<ADSBackend.Models.OrderModels.Order> Order { get; set; }
 
-        public DbSet<ADSBackend.Models.OrderViewModels.ProductOrder> ProductOrder { get; set; }
+        public DbSet<ADSBackend.Models.OrderModels.ProductOrder> ProductOrder { get; set; }
     }
 }
