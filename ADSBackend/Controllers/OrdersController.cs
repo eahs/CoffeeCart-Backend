@@ -10,11 +10,11 @@ using ADSBackend.Models.OrderViewModels;
 
 namespace ADSBackend.Controllers
 {
-    public class OrderModelsController : Controller
+    public class OrderController : Controller
     {
         private readonly ApplicationDbContext _context;
 
-        public OrderModelsController(ApplicationDbContext context)
+        public OrderController(ApplicationDbContext context)
         {
             _context = context;
         }
