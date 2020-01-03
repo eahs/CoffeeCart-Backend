@@ -99,7 +99,7 @@ namespace ADSBackend.Controllers
             return OrderModel;
         }
 
-        //PUT: api/ProductModel/id
+        //POST: api/ProductModel/id
         [HttpPost("ProductModel")]
         public async Task<IActionResult> EditProductModel(IFormCollection forms)
         {
@@ -132,6 +132,7 @@ namespace ADSBackend.Controllers
             return NoContent();
         }
 
+        //POST: api/OrderModel/id
         [HttpPost("OrderModel")]
         public async Task<IActionResult> EditOrderModel(IFormCollection forms)
         {
