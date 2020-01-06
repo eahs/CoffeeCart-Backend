@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ADSBackend.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20191210174103_OrderModelsMigrationPartTwoElectricBoogaloo")]
-    partial class OrderModelsMigrationPartTwoElectricBoogaloo
+    [Migration("20200106174326_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -158,7 +158,7 @@ namespace ADSBackend.Migrations
                     b.ToTable("ProductModel");
                 });
 
-            modelBuilder.Entity("ADSBackend.Models.OrderViewModels.ProductOrderModel", b =>
+            modelBuilder.Entity("ADSBackend.Models.OrderViewModels.ProductOrder", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -264,7 +264,7 @@ namespace ADSBackend.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("ADSBackend.Models.OrderViewModels.ProductOrderModel", b =>
+            modelBuilder.Entity("ADSBackend.Models.OrderViewModels.ProductOrder", b =>
                 {
                     b.HasOne("ADSBackend.Models.OrderViewModels.OrderModel")
                         .WithMany("ProductsOrdered")

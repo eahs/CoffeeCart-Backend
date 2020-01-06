@@ -70,7 +70,7 @@ namespace ADSBackend.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     OrdererName = table.Column<string>(nullable: false),
-                    RoomNumber = table.Column<int>(nullable: false),
+                    RoomNumber = table.Column<string>(nullable: false),
                     DateOrdered = table.Column<DateTime>(nullable: false),
                     Status = table.Column<string>(nullable: true)
                 },
