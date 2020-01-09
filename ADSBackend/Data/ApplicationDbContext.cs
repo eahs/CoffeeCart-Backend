@@ -30,5 +30,7 @@ namespace ADSBackend.Data
         public DbSet<ADSBackend.Models.OrderViewModels.OrderModel> OrderModel { get; set; }
 
         public DbSet<ADSBackend.Models.OrderViewModels.ProductOrder> ProductOrderModel { get; set; }
+
+        public DbSet<ADSBackend.Models.Identity.ApplicationUser> ApplicationUser { get; set; }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using ADSBackend.Data;
 using ADSBackend.Models.ApiModels;
+using ADSBackend.Models.Identity;
 using ADSBackend.Models.OrderViewModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -69,6 +70,20 @@ namespace ADSBackend.Controllers
         {
             var OrderModels = await _context.OrderModel.ToListAsync();
             return OrderModels;
+        }
+
+        //Get: api/GetUser/name
+        [HttpGet("GetUser")]
+        public async Task<ActionResult<ApplicationUser>> GetUserByName(string name)
+        {
+            var User = await _context.ApplicationUser.FirstAsync(p => p.FullName == name);
+
+            if (User == null)
+            {
+                return NotFound();
+            }
+
+            return User;
         }
 
         //GET: api/GetOrder/id
