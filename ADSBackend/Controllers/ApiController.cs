@@ -10,6 +10,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace ADSBackend.Controllers
 {
@@ -73,7 +75,7 @@ namespace ADSBackend.Controllers
         }
 
         //Get: api/GetUser/name
-        [HttpGet("GetUser")]
+        [HttpGet("GetUser/{name}")]
         public async Task<ActionResult<ApplicationUser>> GetUserByName(string name)
         {
             var User = await _context.ApplicationUser.FirstAsync(p => p.FullName == name);
@@ -192,6 +194,13 @@ namespace ADSBackend.Controllers
             {
                 return ProductType.Pastry;
             }
+        }
+
+        //to convert string to ProductOrders
+        private ProductOrder ToProductOrder(StringValues str)
+        {
+            JObject json = JObject.Parse(str);
+            return JsonConvert.DeserializeObject<ProductOrder>(str);
         }
     }
 }
