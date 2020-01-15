@@ -157,7 +157,7 @@ namespace ADSBackend.Controllers
             var ordermodel = await _context.OrderModel.FirstOrDefaultAsync(p => p.Id == id);
 
             ordermodel.OrdererName = forms["name"];
-            //ordermodel.RoomNumber = forms["room"];
+            ordermodel.RoomNumber = forms["room"];
             ordermodel.DateOrdered = Convert.ToDateTime(forms["date"]);
             ordermodel.Status = forms["status"];
             ordermodel.ProductsOrdered = ToProductOrderList(forms["order"]);
