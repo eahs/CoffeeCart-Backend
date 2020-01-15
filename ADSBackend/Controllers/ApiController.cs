@@ -160,7 +160,7 @@ namespace ADSBackend.Controllers
             //ordermodel.RoomNumber = forms["room"];
             ordermodel.DateOrdered = Convert.ToDateTime(forms["date"]);
             ordermodel.Status = forms["status"];
-            //ordermodel.ProductsOrdered = forms["order"];
+            ordermodel.ProductsOrdered = ToProductOrderList(forms["order"]);
 
             _context.OrderModel.Update(ordermodel);
 
@@ -196,11 +196,10 @@ namespace ADSBackend.Controllers
             }
         }
 
-        //to convert string to ProductOrders
-        private ProductOrder ToProductOrder(StringValues str)
+        //to convert a string to a list of ProductOrders
+        private List<ProductOrder> ToProductOrderList(StringValues str)
         {
-            JObject json = JObject.Parse(str);
-            return JsonConvert.DeserializeObject<ProductOrder>(str);
+            return JsonConvert.DeserializeObject<List<ProductOrder>>(str);
         }
     }
 }
