@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace ADSBackend.Models.OrderViewModels
 {
-    public class ProductOrder
+    public class ProductOrderModel
     {
         public int Id { get; set; }
         public ProductModel Product { get; set; }
