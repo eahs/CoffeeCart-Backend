@@ -197,9 +197,9 @@ namespace ADSBackend.Controllers
         }
 
         //to convert a string to a list of ProductOrders
-        private List<ProductOrder> ToProductOrderList(StringValues str)
+        private List<ProductOrderModel> ToProductOrderList(StringValues str)
         {
-            return JsonConvert.DeserializeObject<List<ProductOrder>>(str);
+            return JsonConvert.DeserializeObject<List<ProductOrderModel>>(str);
         }
     }
 }
