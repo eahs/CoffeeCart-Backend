@@ -30,13 +30,6 @@ namespace ADSBackend.Controllers
             _context = context;
         }
 
-        //POST:
-        /*[HttpPost("ChangeOrderStatus")]
-        public async Task<OrderModel> AddOrder(int Id, string newStatus)
-        {
-
-        }*/
-
         // GET: api/Config
         [HttpGet("Config")]
         public ConfigResponse GetConfig()
