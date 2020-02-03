@@ -1,6 +1,6 @@
 # CoffeeCart-Backend
 
-Backend for the Coffee Cart advanced data structure project
+Backend for the Coffee Cart advanced data structures project
 
 ## API methods:
 
