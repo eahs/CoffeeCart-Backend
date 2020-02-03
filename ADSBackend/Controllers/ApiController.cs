@@ -30,13 +30,6 @@ namespace ADSBackend.Controllers
             _context = context;
         }
 
-        //POST:
-        /*[HttpPost("ChangeOrderStatus")]
-        public async Task<OrderModel> AddOrder(int Id, string newStatus)
-        {
-
-        }*/
-
         // GET: api/Config
         [HttpGet("Config")]
         public ConfigResponse GetConfig()
@@ -197,9 +190,9 @@ namespace ADSBackend.Controllers
         }
 
         //to convert a string to a list of ProductOrders
-        private List<ProductOrder> ToProductOrderList(StringValues str)
+        private List<ProductOrderModel> ToProductOrderList(StringValues str)
         {
-            return JsonConvert.DeserializeObject<List<ProductOrder>>(str);
+            return JsonConvert.DeserializeObject<List<ProductOrderModel>>(str);
         }
     }
 }

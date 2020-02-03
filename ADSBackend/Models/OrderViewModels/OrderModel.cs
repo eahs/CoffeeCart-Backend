@@ -24,7 +24,7 @@ namespace ADSBackend.Models.OrderViewModels
         public String Status { get; set; }
 
         [Display(Name = "Order")]
-        public List<ProductOrder> ProductsOrdered { get; set; }
+        public List<ProductOrderModel> ProductsOrdered { get; set; }
 
         
         
