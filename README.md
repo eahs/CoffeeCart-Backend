@@ -17,3 +17,5 @@ api/GetOrderByName/name: A GET request that gets an order by the name of the ord
 api/ProductModel/id: A POST method for changing a Product that is accessed by its ID.
 
 api/OrderModel/id: A POST method for changing an Order that is accessed by its ID.
+
+Note that GET api methods should not be requested with any body content
