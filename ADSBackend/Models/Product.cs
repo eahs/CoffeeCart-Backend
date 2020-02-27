@@ -11,9 +11,12 @@ namespace ADSBackend.Models
         public int Id { get; set; }
         
         [Required]
+        [Display(Name = "Name")]
         public string Name { get; set; }
         [Required]
+        [Display(Name = "Type")]
         public Type Type { get; set; }
+        [Display(Name = "Options")]
         public List<Option> Options { get; set; }
     }
 
