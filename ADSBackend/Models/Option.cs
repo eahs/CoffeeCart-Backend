@@ -9,6 +9,9 @@ namespace ADSBackend.Models
     public class Option
     {
         [Required]
+        public int Id { get; set; }
+
+        [Required]
         public string Name { get; set; }
         public string Body { get; set; }
     }
