@@ -12,6 +12,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using ADSBackend.Models;
 
 namespace ADSBackend.Controllers
 {
@@ -40,9 +41,9 @@ namespace ADSBackend.Controllers
 
         //GET: api/GetProducts
         [HttpGet("GetProducts")]
-        public async Task<List<ProductModel>> GetProductList() {
-            var ProductModels = await _context.ProductModel.ToListAsync();
-            return ProductModels;
+        public async Task<List<Product>> GetProductList() {
+            var Products = await _context.Product.ToListAsync();
+            return Products;
         }
 
         //GET: api/GetProduct/id
