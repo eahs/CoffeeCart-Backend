@@ -19,12 +19,12 @@
             </div>
             <div class="form-group">
                 <label asp-for="Options" class="control-label"></label>
-                <input asp-for="Options" class="form-control" />
+                @Html.TextArea("Options", null, new { @class = "form-control" })
                 <span asp-validation-for="Options" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Addons" class="control-label"></label>
-                <input asp-for="Addons" class="form-control" />
+                @Html.TextArea("Addons", null, new { @class = "form-control" })
                 <span asp-validation-for="Addons" class="text-danger"></span>
             </div>
             <div class="form-group">
